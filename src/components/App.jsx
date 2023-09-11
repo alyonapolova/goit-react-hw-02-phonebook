@@ -3,6 +3,7 @@ import { ContactForm } from './Form/Form';
 import { Filter } from './Form/Filter';
 import { ContactList } from './Form/ContactList';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export class App extends Component {
   state = {
@@ -20,12 +21,18 @@ export class App extends Component {
       contacts: [...prevState.contacts, newContact],
     }));
   };
-  handleFilterChange = filter => {
-    this.setState({ filter });
+  handleFilterChange = e => {
+    this.setState({ filter: e.currentTarget.value });
+  };
+  handleDelete = id => {
+    this.setState(prev => ({
+      contacts: prev.contacts.filter(contact => contact.id !== id),
+    }));
   };
 
   render() {
     const { contacts, filter } = this.state;
+
     return (
       <div>
         <h1>Phonebook</h1>
@@ -35,8 +42,22 @@ export class App extends Component {
         />
         <h2>Contacts</h2>
         <Filter value={filter} onChange={this.handleFilterChange} />
-        <ContactList contacts={contacts} filter={filter} />
+        <ContactList
+          contacts={contacts}
+          filter={filter}
+          handleDelete={this.handleDelete}
+        />
       </div>
     );
   }
 }
+App.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      // id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  filter: PropTypes.string.isRequired,
+};

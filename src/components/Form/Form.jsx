@@ -18,7 +18,6 @@ export class ContactForm extends Component {
     const { name, number } = this.state;
     const { contacts, onSubmit } = this.props;
     const findDuplicate = contacts.some(contact => contact.name === name);
-    //this.props.onSubmit({ name, number, id: this.inputId });
 
     if (name.trim() === '') {
       return;
@@ -30,7 +29,6 @@ export class ContactForm extends Component {
       onSubmit({ id: nanoid(), name, number });
       this.setState({ name: '', number: '' });
     }
-    //this.setState({ name: '', number: '' });
   };
 
   render() {
