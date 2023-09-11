@@ -1,17 +1,17 @@
 import React from 'react';
-
+import { ListUl, ListLi, ButtonLi } from './Form.styled';
 export const ContactList = ({ contacts, filter, handleDelete }) => {
   const filteredContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
   return (
-    <ul>
+    <ListUl>
       {filteredContacts.map(contact => (
-        <li key={contact.id}>
+        <ListLi key={contact.id}>
           {contact.name}: {contact.number}{' '}
-          <button onClick={() => handleDelete(contact.id)}>Delete</button>
-        </li>
+          <ButtonLi onClick={() => handleDelete(contact.id)}>Delete</ButtonLi>
+        </ListLi>
       ))}
-    </ul>
+    </ListUl>
   );
 };

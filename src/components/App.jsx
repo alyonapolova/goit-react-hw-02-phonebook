@@ -4,7 +4,7 @@ import { Filter } from './Form/Filter';
 import { ContactList } from './Form/ContactList';
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { FormDiv } from './Form/Form.styled';
 export class App extends Component {
   state = {
     contacts: [
@@ -34,20 +34,22 @@ export class App extends Component {
     const { contacts, filter } = this.state;
 
     return (
-      <div>
-        <h1>Phonebook</h1>
-        <ContactForm
-          onSubmit={this.handleAddContact}
-          contacts={this.state.contacts}
-        />
-        <h2>Contacts</h2>
-        <Filter value={filter} onChange={this.handleFilterChange} />
-        <ContactList
-          contacts={contacts}
-          filter={filter}
-          handleDelete={this.handleDelete}
-        />
-      </div>
+      <>
+        <FormDiv>
+          <h1>Phonebook</h1>
+          <ContactForm
+            onSubmit={this.handleAddContact}
+            contacts={this.state.contacts}
+          />
+          <h2>Contacts</h2>
+          <Filter value={filter} onChange={this.handleFilterChange} />
+          <ContactList
+            contacts={contacts}
+            filter={filter}
+            handleDelete={this.handleDelete}
+          />
+        </FormDiv>
+      </>
     );
   }
 }
